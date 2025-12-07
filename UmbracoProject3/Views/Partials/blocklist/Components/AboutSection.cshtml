@@ -1,0 +1,137 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Models
+
+
+@{
+    // Vänsterkolumn
+    var aboutLabel = Model.Content.Value<string>("aboutLabel");
+    var aboutTitle = Model.Content.Value<string>("aboutTitle");
+    var aboutQuote = Model.Content.Value<string>("aboutQuote");
+    var aboutDescription = Model.Content.Value<string>("aboutDescription");
+    var aboutNameAndRole = Model.Content.Value<string>("aboutNameAndRole");
+    var signatureImage = Model.Content.Value<MediaWithCrops>("aboutSignature");
+
+
+    // Form (högerkortet)
+    var formTitle = Model.Content.Value<string>("formTitle");
+    var formDescription = Model.Content.Value<string>("formDescription");
+}
+
+<section class="relative py-16" style="overflow:visible;">
+    <div class="mx-auto px-4"
+         style="max-width:1280px; position:relative; min-height:520px; display:grid; grid-template-columns:3fr 2fr; column-gap:3rem;">
+
+        <!-- Vänster: ABOUT US -->
+        <div style="padding-top:80px; max-width:600px;">
+            @if (!string.IsNullOrWhiteSpace(aboutLabel))
+            {
+                <div class="rte title-orange-600 mb-2">
+                    @aboutLabel
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(aboutTitle))
+            {
+                <div class="rte main-header mb-6">
+                    @aboutTitle
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(aboutQuote))
+            {
+                <div class="rte italic mb-6">
+                    @Html.Raw(aboutQuote)
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(aboutDescription))
+            {
+                <div class="rte mb-8">
+                    @Html.Raw(aboutDescription)
+                </div>
+            }
+            @if (signatureImage != null)
+            {
+                <img src="@signatureImage.Url()" alt="Signature"
+                     style="width:160px; height:auto; display:block; margin-bottom:0.5rem;" />
+            }
+            @if (!string.IsNullOrWhiteSpace(aboutNameAndRole))
+            {
+                <p class="text-sm text-[var(--clr-body-text)]">
+                    @aboutNameAndRole
+                </p>
+            }
+        </div>
+
+        <!-- Höger tom grid-kolumn (plats för form) -->
+        <div></div>
+
+        <!-- Formulär-kortet -->
+        <div style="
+            position:absolute;
+            top:-120px;
+            right:0;
+            width:470px;
+            height:572px;
+            z-index:10;">
+            <div style="
+                width:100%;
+                height:100%;
+                border:1px solid #E5E7EB;
+                box-shadow:0 20px 40px rgba(0,0,0,0.08);
+                background:#ffffff;
+                display:flex;
+                flex-direction:column;">
+
+                <!-- Header -->
+                <div style="
+                    background:#4F5B54;
+                    color:#F9FAFB;
+                    padding:1.5rem 2rem;
+                    font-weight:700;
+                    display:flex;
+                    align-items:center;">
+                    <h2 style="font-size:1.25rem; margin:0;">
+                        @(string.IsNullOrWhiteSpace(formTitle) ? "Request a call back" : formTitle)
+                    </h2>
+                </div>
+
+                <!-- Body -->
+                <div style="
+                    padding:2rem;
+                    flex:1;
+                    display:flex;
+                    flex-direction:column;">
+                    @if (!string.IsNullOrWhiteSpace(formDescription))
+                    {
+                        <p style="color:#4A4A4A; font-style:italic; margin-bottom:1.5rem;">
+                            @formDescription
+                        </p>
+                    }
+
+                    <form style="display:flex; flex-direction:column; gap:0.75rem; margin-top:0.5rem; flex:1;">
+                        <input type="text" placeholder="Name"
+                               style="width:100%; border:1px solid #D1D5DB; border-radius:4px; padding:0.75rem; font-size:0.875rem;" />
+                        <input type="email" placeholder="Email address"
+                               style="width:100%; border:1px solid #D1D5DB; border-radius:4px; padding:0.75rem; font-size:0.875rem;" />
+                        <input type="tel" placeholder="Phone"
+                               style="width:100%; border:1px solid #D1D5DB; border-radius:4px; padding:0.75rem; font-size:0.875rem;" />
+
+                        <select style="width:100%; border:1px solid #D1D5DB; border-radius:4px; padding:0.75rem; font-size:0.875rem; margin-top:0.25rem;">
+                            <option>Financial consulting</option>
+                            <option>Tax &amp; Trusts</option>
+                            <option>Audit</option>
+                        </select>
+
+                        <button type="button"
+                                style="margin-top:auto; width:100%; padding:0.85rem; border:none; border-radius:4px; background:#E9D9B1; color:#111827; font-weight:600; cursor:pointer;">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

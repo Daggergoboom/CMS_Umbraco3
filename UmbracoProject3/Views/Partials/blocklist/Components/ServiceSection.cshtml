@@ -1,5 +1,6 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
 @using Umbraco.Cms.Core.Models.PublishedContent
+@using System.Collections.Generic
 @using Umbraco.Extensions
 @using Umbraco.Cms.Core.Models
 
@@ -25,7 +26,8 @@
             @foreach (var block in serviceItems)
             {
                 var content = block.Content;
-                var image = content.Value<IPublishedContent>("serviceImage");
+                var images = content.Value<IEnumerable<IPublishedContent>>("serviceImage");
+                var image = images?.FirstOrDefault();
                 var title = content.Value<string>("cardTitle");
                 var desc = content.Value<string>("serviceDescription");
 
