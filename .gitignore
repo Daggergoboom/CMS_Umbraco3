@@ -1,0 +1,74 @@
+###############
+### VISUAL STUDIO
+###############
+
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+###############
+### BUILD OUTPUT
+###############
+
+bin/
+obj/
+out/
+Generated\ Files/
+
+###############
+### UMBRACO-SPECIFIKT
+###############
+
+# ModelsBuilder output (om du använder PureLive eller Nothing)
+umbraco/models/
+
+# TEMP mappar
+App_Data/TEMP/
+App_Data/Logs/
+App_Data/NuGetBackup/
+
+# SQLite databas och lock-fil
+*.sqlite.db
+*.sqlite.db-shm
+*.sqlite.db-wal
+
+###############
+### SYSTEM & CACHE
+###############
+
+# OS / Filesystem
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+###############
+### NPM / FRONTEND
+###############
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+###############
+### ENVIRONMENT VARIABLES
+###############
+
+*.env
+*.env.local
+*.env.development
+*.env.production
+
+###############
+### PUBLISH PROFILES
+###############
+
+Properties/PublishProfiles/

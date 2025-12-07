@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+
+@await Html.GetBlockListHtmlAsync(Model, "sections")
+
+@{
+    Layout = "_Layout.cshtml";
+}

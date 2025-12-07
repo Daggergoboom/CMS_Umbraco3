@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using System.Collections.Generic
+@using System.Linq
+
+@{
+    // Fält från HeroSection
+    var bgImages = Model.Content.Value<IEnumerable<IPublishedContent>>("heroBackgroundImage");
+    var bgImage = bgImages?.FirstOrDefault();
+
+    var heroTitle = Model.Content.Value<string>("heroTitle");
+    var heroText = Model.Content.Value<string>("heroText");
+}
+
+<section class="relative py-[7rem]">
+    <div class="absolute inset-0">
+        @if (bgImage != null)
+        {
+            var bgUrl = bgImage.Url();
+            if (!string.IsNullOrWhiteSpace(bgUrl))
+            {
+                <img src="@bgUrl" class="w-full h-full object-cover" />
+            }
+        }
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10" style="max-width: 1280px;">
+        <div class="w-5/12 flex flex-col gap-8">
+            @if (!string.IsNullOrWhiteSpace(heroTitle))
+            {
+                <h1 class="text-[4.5rem] text-[#4F5955] font-bold leading-none">
+                    @heroTitle
+                </h1>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(heroText))
+            {
+                <div class="rte">
+                    @Html.Raw(heroText)
+                </div>
+            }
+
+            @* Knappdelen kan vi slå på senare om det behövs *@
+        </div>
+    </div>
+</section>
