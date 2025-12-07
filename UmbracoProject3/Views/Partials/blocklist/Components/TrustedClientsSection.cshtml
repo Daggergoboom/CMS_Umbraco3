@@ -1,0 +1,94 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Models
+@using System.Collections.Generic
+@using System.Linq
+
+@{
+    var bgMap = Model.Content.Value<MediaWithCrops>("clientBackgroundMap");
+    var bgImage = Model.Content.Value<MediaWithCrops>("clientBackgroundImage");
+
+    var titleRow1 = Model.Content.Value<string>("trustedSectionTitle");
+    var titleRow2 = Model.Content.Value<string>("trustedSectionTitle2");
+
+    var description = Model.Content.Value<string>("clientSectionDescription");
+    var buttonText = Model.Content.Value<string>("clientStoryButton");
+
+    var hasSplitTitle = !string.IsNullOrWhiteSpace(titleRow1) || !string.IsNullOrWhiteSpace(titleRow2);
+}
+
+<section class="relative overflow-hidden" style="padding-top:48px; padding-bottom:0;">
+    <div class="relative mx-auto text-center" style="width:1171px; max-width:100%;">
+
+        @* Kart-bakgrund *@
+        @if (bgMap != null)
+        {
+            <div class="absolute"
+                 style="
+                        top:84px;
+                        left:50%;
+                        transform:translateX(-50%);
+                        width:1171px;
+                        max-width:100%;
+                        height:430px;
+                        background-image:url('@bgMap.Url()');
+                        background-repeat:no-repeat;
+                        background-position:center;
+                        background-size:cover;
+                        pointer-events:none;
+                        z-index:1;">
+            </div>
+        }
+
+        @* Text + knapp *@
+        <div class="relative mx-auto" style="z-index:3; max-width:770px; margin-bottom:56px;">
+            @* Titel i två rader *@
+            @if (hasSplitTitle)
+            {
+                <div class="rte main-header" style="margin-bottom:10px;">
+                    @if (!string.IsNullOrWhiteSpace(titleRow1))
+                    {
+                        <div>@titleRow1</div>
+                    }
+
+                    @if (!string.IsNullOrWhiteSpace(titleRow2))
+                    {
+                        <div style="color:#C3A36A;">@titleRow2</div>
+                    }
+                </div>
+            }
+
+            @* Beskrivning *@
+            @if (!string.IsNullOrWhiteSpace(description))
+            {
+                <div class="rte" style="margin:0 auto 24px auto;">
+                    @Html.Raw(description)
+                </div>
+            }
+
+            @* Knapp *@
+            @if (!string.IsNullOrWhiteSpace(buttonText))
+            {
+                <div class="text-center mt-4 relative z-30">
+                    <a href="/about" class="btn-primary">
+                        @buttonText
+                    </a>
+                </div>
+            }
+        </div>
+
+        @* People-bilden framför kartan *@
+        @if (bgImage != null)
+        {
+            <img src="@bgImage.Url()" alt="Trusted clients"
+                 class="block mx-auto"
+                 style="
+                        width:1171px;
+                        max-width:100%;
+                        height:auto;
+                        margin-top:0;
+                        z-index:2;
+                        position:relative;" />
+        }
+    </div>
+</section>

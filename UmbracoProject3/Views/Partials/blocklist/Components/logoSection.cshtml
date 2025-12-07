@@ -1,0 +1,26 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@using System.Linq;
+
+@{
+    var content = (ContentModels.LogoSection)Model.Content;
+
+    // HÄR ÄR DET VIKTIGT — alias = "logoImages"
+    var multi = content.Value<IEnumerable<MediaWithCrops>>("logoImages");
+    var single = content.Value<MediaWithCrops>("logoImages");
+
+    IEnumerable<MediaWithCrops> logos =
+        (multi != null && multi.Any())
+            ? multi
+            : (single != null ? new[] { single } : Enumerable.Empty<MediaWithCrops>());
+}
+
+<section class="logo-section">
+    <div class="logo-container">
+        @foreach (var logo in logos)
+        {
+            <img src="@logo.Url()" alt="Client logo" class="client-logo" />
+        }
+    </div>
+</section>

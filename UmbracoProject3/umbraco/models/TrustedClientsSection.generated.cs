@@ -87,6 +87,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.0.1+86411e4")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("trustedSectionTitle")]
-		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString TrustedSectionTitle => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "trustedSectionTitle");
+		public virtual string TrustedSectionTitle => this.Value<string>(_publishedValueFallback, "trustedSectionTitle");
+
+		///<summary>
+		/// Trusted section title2
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.0.1+86411e4")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("trustedSectionTitle2")]
+		public virtual string TrustedSectionTitle2 => this.Value<string>(_publishedValueFallback, "trustedSectionTitle2");
 	}
 }

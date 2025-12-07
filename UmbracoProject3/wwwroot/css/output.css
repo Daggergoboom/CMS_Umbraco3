@@ -716,8 +716,9 @@ html {
 }
 
 .logo-section {
-  padding: 40px 0;
-  text-align: center;
+    background-color: #ffffff;
+    padding-top: 200px; /* justera 60–100 tills det känns rätt */
+    padding-bottom: 10rem;
 }
 
 .logo-container {
@@ -729,7 +730,7 @@ html {
 }
 
 .client-logo {
-  height: 60px;
+  height: 36px;
   width: auto;
   opacity: 0.8;
   transition: opacity 0.3s ease;
@@ -1293,4 +1294,8 @@ body {
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+body {
+    outline: 5px solid red !important;
 }

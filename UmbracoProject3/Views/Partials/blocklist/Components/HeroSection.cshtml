@@ -5,13 +5,22 @@
 @using Umbraco.Cms.Core.Models
 
 @{
-    // Fält från HeroSection
-    var bgImages = Model.Content.Value<IEnumerable<IPublishedContent>>("heroBackgroundImage");
-    var bgImage = bgImages?.FirstOrDefault();
+    // Hero background image - funkar både single och multiple picker
+    IPublishedContent bgImage = null;
+
+    if (Model.Content.HasValue("heroBackgroundImage"))
+    {
+        // Försök läsa som multiple
+        var bgImages = Model.Content.Value<IEnumerable<IPublishedContent>>("heroBackgroundImage");
+        bgImage = bgImages?.FirstOrDefault();
+
+        // Om null → försök som single
+        if (bgImage == null)
+            bgImage = Model.Content.Value<IPublishedContent>("heroBackgroundImage");
+    }
 
     var heroTitle = Model.Content.Value<string>("heroTitle");
     var heroText = Model.Content.Value<string>("heroText");
-
     var heroButtonText = Model.Content.Value<string>("heroButtonText");
     var heroButtonLink = Model.Content.Value<IEnumerable<Link>>("heroButtonLink");
 }

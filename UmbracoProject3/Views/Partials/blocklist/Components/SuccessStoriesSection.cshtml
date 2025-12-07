@@ -1,0 +1,61 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+    var content = (ContentModels.SuccessStoriesSection)Model.Content;
+    var stats = content.StatisticsList;
+}
+
+<section class="relative bg-[var(--clr-primary)] py-16 text-center text-[var(--clr-neutral)] overflow-hidden">
+
+    <!-- Bakgrundskarta -->
+    @if (content.SuccessBackgroundImage != null)
+    {
+        var bg = content.SuccessBackgroundImage;
+        <div class="absolute inset-0 bg-no-repeat success-stories"
+             style="background-image: url('@bg.Url()'); background-position: top;"></div>
+    }
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4">
+
+        <!-- Label -->
+        @if (content.SuccessLabel != null && !string.IsNullOrWhiteSpace(content.SuccessLabel.ToString()))
+        {
+            <div class="title-orange">
+                @Html.Raw(content.SuccessLabel)
+            </div>
+        }
+
+        <!-- Titel -->
+        @if (content.SuccessTitle != null)
+        {
+            <div class="rte mb-10 main-header-white">@Html.Raw(content.SuccessTitle)</div>
+        }
+
+        <!-- Statistikrutor -->
+        @if (stats != null && stats.Any())
+        {
+            <div class="flex flex-wrap justify-center gap-12 mb-12">
+                @foreach (var block in stats)
+                {
+                    var stat = (ContentModels.StatBlock)block.Content;
+
+                    <div class="text-center">
+                        <div class="success-stories-stats-golden-numbers">@stat.StatNumber</div>
+                        <div class="success-stories-stats-white-text">@stat.StatDescription</div>
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Team-bild -->
+        @if (content.SuccessTeamImage != null)
+        {
+            var team = content.SuccessTeamImage;
+            <div class="flex justify-center mb-8">
+                <img src="@team.Url()" alt="Success team"
+                     class="w-[970px] h-[544px] object-cover" />
+            </div>
+        }
+    </div>
+</section>
