@@ -2,6 +2,7 @@
 @using Umbraco.Cms.Core.Models.PublishedContent
 @using System.Collections.Generic
 @using System.Linq
+@using Umbraco.Cms.Core.Models
 
 @{
     // Fält från HeroSection
@@ -10,6 +11,9 @@
 
     var heroTitle = Model.Content.Value<string>("heroTitle");
     var heroText = Model.Content.Value<string>("heroText");
+
+    var heroButtonText = Model.Content.Value<string>("heroButtonText");
+    var heroButtonLink = Model.Content.Value<IEnumerable<Link>>("heroButtonLink");
 }
 
 <section class="relative py-[7rem]">
@@ -40,7 +44,16 @@
                 </div>
             }
 
-            @* Knappdelen kan vi slå på senare om det behövs *@
+            @if (!string.IsNullOrWhiteSpace(heroButtonText) && heroButtonLink != null)
+            {
+                var link = heroButtonLink.FirstOrDefault();
+                if (link != null)
+                {
+                    <a href="@link.Url" target="@link.Target" class="btn-primary self-start">
+                        @heroButtonText
+                    </a>
+                }
+            }
         </div>
     </div>
 </section>

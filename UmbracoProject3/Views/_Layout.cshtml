@@ -1,16 +1,72 @@
-﻿<!DOCTYPE html>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Extensions
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
     <title>@ViewBag.Title</title>
 
     <link rel="stylesheet" href="~/css/output.css" asp-append-version="true" />
 </head>
 <body>
+    <div class="top-bar">
+        <div class="container mx-auto flex items-center justify-between px-4 py-2">
+            <div class="text-[13px]">
+                Klarabergsviadukten 90, 111 64 Stockholm
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+
+                <a href="#"
+                   style="padding:8px 12px; border-left:1px solid rgba(255,255,255,0.2); display:inline-flex; align-items:center; justify-content:center;">
+                    <i class="fa-brands fa-facebook-f" style="font-size:14px;"></i>
+                </a>
+
+                <a href="#"
+                   style="padding:8px 12px; border-left:1px solid rgba(255,255,255,0.2); display:inline-flex; align-items:center; justify-content:center;">
+                    <i class="fa-brands fa-twitter" style="font-size:14px;"></i>
+                </a>
+
+                <a href="#"
+                   style="padding:8px 12px; border-left:1px solid rgba(255,255,255,0.2); display:inline-flex; align-items:center; justify-content:center;">
+                    <i class="fa-brands fa-linkedin-in" style="font-size:14px;"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    <section class="navbar-section">
+        <div class="navbar-inner">
+
+            <div class="navbar-logo">
+                <a href="@Umbraco.AssignedContentItem.Root().Url()">
+                    <img src="/css/Onatrix-Logo.svg" alt="Onatrix" />
+                </a>
+            </div>
+
+            <ul class="navbar-links">
+                <li class="navbar-link-item"><a href="#about">About</a></li>
+                <li class="navbar-link-item"><a href="#services">Services</a></li>
+                <li class="navbar-link-item"><a href="#projects">Projects</a></li>
+                <li class="navbar-link-item"><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="navbar-search">
+                <button type="button"
+                        class="navbar-search-btn"
+                        aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
 
     @RenderBody()
-
 </body>
 </html>

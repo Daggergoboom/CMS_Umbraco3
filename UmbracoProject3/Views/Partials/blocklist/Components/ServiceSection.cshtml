@@ -1,0 +1,51 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Models
+
+@{
+    var bgColor = Model.Content.Value<string>("serviceBgColor");
+    var serviceItems = Model.Content.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("serviceList");
+}
+
+<section class="py-[6rem]" style="background:@bgColor;">
+    <div class="container mx-auto px-4" style="max-width:1280px;">
+
+        <div class="flex flex-col gap-2 items-center">
+            <div class="rte text-[0.875rem] font-bold uppercase text-center title-orange-600">
+                OUR SERVICES
+            </div>
+
+            <div class="rte main-header">
+                <p>We Provide The Solutions<br />To Grow Your Business Faster</p>
+            </div>
+        </div>
+
+        <div class="mt-5 grid grid-cols-3 gap-4">
+            @foreach (var block in serviceItems)
+            {
+                var content = block.Content;
+                var image = content.Value<IPublishedContent>("serviceImage");
+                var title = content.Value<string>("cardTitle");
+                var desc = content.Value<string>("serviceDescription");
+
+                <div class="w-full min-h-[350px] overflow-hidden">
+                    <a href="#" class="block no-underline card-services">
+                        <h4 class="title-services-22">
+                            @title
+                        </h4>
+
+                        @if (image != null)
+                        {
+                            <img src="@image.Url()" alt="@title" class="block w-full h-[220px] object-cover" />
+                        }
+
+                        <div class="card-services-description">
+                            @Html.Raw(desc)
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
